@@ -40,7 +40,7 @@ public class Constants
     public static final String WEBSITE  = "https://giveaways.dougley.com";
     public static final String SUPPORT  = "https://discord.gg/a8YVePH";
     public static final String OWNER    = "**Niflheim**#0064";
-    public static final String GITHUB   = "not";
+    public static final String GITHUB   = "https://github.com/Dougley/GiveawayBot";
     public static final String VERSION  = "2.4";
     public static final String PERMS    = "`Read Messages`, `Write Messages`, `Read Message History`, `Embed Links`, `Use External Emoji`, and `Add Reactions`";
     
