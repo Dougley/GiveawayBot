@@ -1,5 +1,5 @@
 
-## [GiveawayBot](https://giveawaybot.party)
+## [GiveawayBot](https://giveaways.dougley.com)
 
 [![Stars](https://img.shields.io/github/stars/jagrosh/GiveawayBot.svg)](https://github.com/jagrosh/GiveawayBot/stargazers)
 [![GuildCount](https://img.shields.io/badge/dynamic/json.svg?label=servers&url=https%3A%2F%2Fdiscord.bots.gg%2Fapi%2Fv1%2Fbots%2F294882584201003009&query=%24.guildCount&colorB=7289DA)](https://discord.bots.gg/bots/294882584201003009)
