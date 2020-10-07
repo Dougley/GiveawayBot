@@ -28,19 +28,20 @@ public class Constants
 {
     public static final OffsetDateTime STARTUP = OffsetDateTime.now();
     public static final int PRIZE_MAX   = 250;
-    public static final long SERVER_ID  = 585687812548853760L;
+    public static final long SERVER_ID  = 510181300406321153L;
     public static final String TADA     = "\uD83C\uDF89"; // 🎉
     public static final String WARNING  = "\uD83D\uDCA5"; // 💥
     public static final String ERROR    = "\uD83D\uDCA5"; // 💥
-    public static final String YAY      = "<:yay:585696613507399692>";//"<:yay:440620097543864320>";
-    public static final String REACTION = "yay:585696613507399692";//"yay:440620097543864320";
+    public static final String YAY      = "\uD83C\uDF89"; //"<:yay:440620097543864320>";
+    public static final String REACTION = "\uD83C\uDF89"; //"yay:440620097543864320";
     public static final Color  BLURPLE  = Color.decode("#7289DA");
-    public static final String INVITE   = "https://giveawaybot.party/invite";
+    public static final String INVITE   = "https://giveaways.dougley.com/invite";
     public static final int MIN_TIME    = 10;
-    public static final String WEBSITE  = "https://giveawaybot.party";
-    public static final String OWNER    = "**jagrosh**#4824";
-    public static final String GITHUB   = "https://github.com/jagrosh/GiveawayBot";
-    public static final String VERSION  = "2.2";
+    public static final String WEBSITE  = "https://giveaways.dougley.com";
+    public static final String SUPPORT  = "https://discord.gg/a8YVePH";
+    public static final String OWNER    = "**Niflheim**#0064";
+    public static final String GITHUB   = "not";
+    public static final String VERSION  = "2.4";
     public static final String PERMS    = "`Read Messages`, `Write Messages`, `Read Message History`, `Embed Links`, `Use External Emoji`, and `Add Reactions`";
     
     public static final boolean canSendGiveaway(TextChannel channel)

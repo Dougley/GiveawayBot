@@ -22,7 +22,7 @@ repositories {
 }
 
 dependencies {
-    implementation (group: 'net.dv8tion', name: 'JDA', version: '4.2.0_189') {
+    implementation (group: 'net.dv8tion', name: 'JDA', version: '4.2.0_208') {
         exclude module: 'opus-java'
     }
     implementation group: 'club.minnced', name: 'discord-webhooks', version: '0.3.0'
@@ -38,7 +38,10 @@ dependencies {
 }
 
 shadowJar {
-    mainClassName = 'com.jagrosh.giveawaybot.GiveawayBot'
+    mainClassName  = 'com.jagrosh.giveawaybot.GiveawayBot'
+    classifier     = ''
+    version        = ''
+    destinationDir = new File('./shadowjar/')
 }
 
 compileJava.options.encoding = 'UTF-8'

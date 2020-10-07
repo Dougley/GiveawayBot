@@ -35,10 +35,10 @@ public class InviteCommand extends Command
     
     @Override
     protected void execute(CommandEvent event) {
-        event.reply(Constants.YAY+" Hello! I'm **GiveawayBot**! I help to make giveaways quick and easy!\n"
+        event.reply(Constants.YAY+" Hello! I'm **Giveaways+**! I help to make giveaways quick and easy!\n"
                 + "You can add me to your server with this link:\n\n"
                 + LINK + " **<"+Constants.INVITE+">**\n\n"
-                + "Check out my commands by typing `!ghelp`");
+                + "Check out my commands by typing `" + event.getClient().getPrefix() + "help`");
     }
     
 }

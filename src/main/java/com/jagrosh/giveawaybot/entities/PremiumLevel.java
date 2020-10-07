@@ -24,9 +24,9 @@ import com.jagrosh.giveawaybot.Constants;
 public enum PremiumLevel
     {
         NONE   (0, "None",          60*60*24*7*2, 20, 20, false, 0L),
-        BOOST  (1, "Nitro Booster", 60*60*24*7*5, 30, 25, true,  585981877396045826L),
-        PATRON (2, "Patron",        60*60*24*7*5, 30, 25, true,  585689274565918721L),
-        DONATOR(3, "Donator",       60*60*24*7*5, 30, 25, true,  585708901270421504L);
+        BOOST  (1, "Nitro Booster", 60*60*24*7*5, 30, 25, true,  763324854363357185L),
+        DONATOR(2, "Donator",       60*60*24*7*5, 30, 25, true,  763011849335603222L),
+        STAFF  (3, "Staff",         60*60*24*7*4, 40, 40, true,  761675165586292738L);
         
         public final int level;
         public final String name;

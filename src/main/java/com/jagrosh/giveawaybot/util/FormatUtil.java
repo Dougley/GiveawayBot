@@ -45,8 +45,8 @@ public class FormatUtil
         HashMap<JDA.Status, String> map = new HashMap<>();
         shards.forEach(jda -> map.put(jda.getStatus(), map.getOrDefault(jda.getStatus(), "") + " " + jda.getShardInfo().getShardId()));
         StringBuilder sb = new StringBuilder("```diff");
-        map.entrySet().forEach(entry -> sb.append("\n").append(entry.getKey()==JDA.Status.CONNECTED ? "+ " : "- ")
-                .append(entry.getKey()).append(":").append(entry.getValue()));
+        map.forEach((key, value) -> sb.append("\n").append(key == JDA.Status.CONNECTED ? "+ " : "- ")
+                .append(key).append(":").append(value));
         return sb.append(" ```").toString();
     }
     

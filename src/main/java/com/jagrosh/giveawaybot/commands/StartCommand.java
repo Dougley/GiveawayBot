@@ -33,7 +33,7 @@ import net.dv8tion.jda.api.exceptions.PermissionException;
  */
 public class StartCommand extends GiveawayCommand
 {
-    private final static String EXAMPLE = "\nExample usage: `!gstart 30m 5w Awesome T-Shirt`";
+    private final static String EXAMPLE = "\nExample usage: `+gstart 30m 5w Awesome T-Shirt`";
     
     public StartCommand(Bot bot)
     {

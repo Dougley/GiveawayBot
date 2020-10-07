@@ -43,7 +43,7 @@ public class CreateCommand extends GiveawayCommand
     private final static String WINNERS = "\n\n`Please enter a number of winners between 1 and %d.`";
     private final static String PRIZE = "\n\n`Please enter the giveaway prize. This will also begin the giveaway.`";
     
-    private final static List<String> CANCEL_WORDS = Arrays.asList("cancel", "!gcancel", "g!cancel");
+    private final static List<String> CANCEL_WORDS = Arrays.asList("cancel", "+gcancel", "g+cancel");
     
     private final Set<Long> current;
     
