@@ -18,6 +18,8 @@ package com.jagrosh.giveawaybot.rest;
 import javax.annotation.CheckReturnValue;
 import net.dv8tion.jda.api.MessageBuilder;
 import net.dv8tion.jda.api.entities.Message;
+import net.dv8tion.jda.api.entities.User;
+import net.dv8tion.jda.api.requests.RestAction;
 import net.dv8tion.jda.internal.JDAImpl;
 import net.dv8tion.jda.internal.entities.GuildImpl;
 import net.dv8tion.jda.internal.entities.TextChannelImpl;
@@ -75,5 +77,16 @@ public class RestJDA
     public RestReactionPaginationAction getReactionUsers(long channelId, long messageId, String code)
     {
         return new RestReactionPaginationAction(new RestMessage(internalJDA, messageId, channelId), code);
+    }
+
+    @CheckReturnValue
+    public RestAction<User> retrieveUserById(long userId) {
+        return internalJDA.retrieveUserById(userId, false);
+    }
+
+    public void shutdown() {
+        internalJDA.shutdownRequester();
+        internalJDA.shutdownInternals();
+        internalJDA.shutdown();
     }
 }

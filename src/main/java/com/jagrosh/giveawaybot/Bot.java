@@ -18,6 +18,7 @@ package com.jagrosh.giveawaybot;
 import com.jagrosh.giveawaybot.commands.*;
 import com.jagrosh.giveawaybot.database.Database;
 import com.jagrosh.giveawaybot.entities.*;
+import com.jagrosh.giveawaybot.rest.RestJDA;
 import com.jagrosh.giveawaybot.util.FormatUtil;
 import com.jagrosh.jdautilities.command.CommandClient;
 import com.jagrosh.jdautilities.command.CommandClientBuilder;
@@ -59,6 +60,7 @@ public class Bot extends ListenerAdapter
     private final ScheduledExecutorService threadpool; // threadpool to use for timings
     private final Database database; // database
     private final Logger LOG = LoggerFactory.getLogger("Bot");
+    private RestJDA restJDA;
     
     private Bot(Database database, String webhookUrl)
     {
@@ -90,13 +92,21 @@ public class Bot extends ListenerAdapter
     {
         return database;
     }
-    
+
+    public RestJDA getRestJDA() {
+        if (restJDA == null) return startRestJDA();
+        return restJDA;
+    }
+
     // public methods
     public void shutdown()
     {
         threadpool.shutdown();
         shards.shutdown();
         database.shutdown();
+
+        if (restJDA != null)
+            restJDA.shutdown();
     }
     
     public boolean startGiveaway(TextChannel channel, User creator, Instant now, int seconds, int winners, String prize)
@@ -122,6 +132,23 @@ public class Bot extends ListenerAdapter
         } 
         catch(Exception ignore) {}
         return database.giveaways.deleteGiveaway(messageId);
+    }
+
+    public RestJDA startRestJDA() {
+        Config config = ConfigFactory.load();
+
+        RestJDA rest = new RestJDA(config.getString("bot-token"));
+        this.restJDA = rest;
+
+        return rest;
+    }
+
+    public boolean stopRestJDA() {
+        this.restJDA.shutdown();
+
+        this.restJDA = null;
+
+        return true;
     }
     
     // events
@@ -198,6 +225,7 @@ public class Bot extends ListenerAdapter
                         
                         new DebugCommand(bot),
                         new EvalCommand(bot),
+                        new GDPRCommand(bot),
                         new ShutdownCommand(bot)
                 ).build();
         

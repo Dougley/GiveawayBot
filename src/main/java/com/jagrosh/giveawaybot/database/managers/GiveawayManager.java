@@ -70,7 +70,11 @@ public class GiveawayManager extends DataManager
     {
         return getGiveaways(selectAll(CHANNEL_ID.is(channel.getIdLong())));
     }
-    
+
+    public List<Giveaway> getGiveaways(User user) {
+        return getGiveaways(selectAll(USER_ID.is(user.getIdLong())));
+    }
+
     public List<Giveaway> getGiveaways(Guild guild)
     {
         return getGiveaways(selectAll(GUILD_ID.is(guild.getIdLong())));
