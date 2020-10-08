@@ -172,6 +172,18 @@ public class Bot extends ListenerAdapter
                           config.getString("webhook"));
         
         // build the client to deal with commands
+
+        String discordBotsKey = config.getString("listing.discord-bots");
+        String carbonitexKey  = config.getString("listing.carbon");
+
+        if (discordBotsKey != null && discordBotsKey.isEmpty()) {
+            discordBotsKey = null;
+        }
+
+        if (carbonitexKey != null && carbonitexKey.isEmpty()) {
+            carbonitexKey = null;
+        }
+
         CommandClient client = new CommandClientBuilder()
                 .setPrefix(config.getString("prefix"))
                 .setAlternativePrefix(config.getString("altprefix"))
@@ -179,28 +191,28 @@ public class Bot extends ListenerAdapter
                 .setCoOwnerIds("198137282018934784", "107904023901777920")
                 .setActivity(Activity.playing(Constants.TADA+" "+Constants.WEBSITE+" "+Constants.TADA+" Type +ghelp "+Constants.TADA))
                 .setEmojis(Constants.TADA, Constants.WARNING, Constants.ERROR)
-                .setHelpConsumer(event -> event.replyInDm(FormatUtil.formatHelp(event), 
-                        m-> {try{event.getMessage().addReaction(Constants.REACTION).queue(s->{},f->{});}catch(PermissionException ignored){}}, 
+                .setHelpConsumer(event -> event.replyInDm(FormatUtil.formatHelp(event),
+                        m-> {try{event.getMessage().addReaction(Constants.REACTION).queue(s->{},f->{});}catch(PermissionException ignored){}},
                         f-> event.replyWarning("Help could not be sent because you are blocking Direct Messages")))
-                .setDiscordBotsKey(config.getString("listing.discord-bots"))
-                .setCarbonitexKey(config.getString("listing.carbon"))
+                .setDiscordBotsKey(discordBotsKey)
+                .setCarbonitexKey(carbonitexKey)
                 .addCommands(
                         new AboutCommand(bot),
                         new InviteCommand(),
                         new PingCommand(),
-                        
+
                         new CreateCommand(bot),
                         new StartCommand(bot),
                         new EndCommand(bot),
                         new RerollCommand(bot),
                         new ListCommand(bot),
                         new SettingsCommand(bot),
-                        
+
                         new DebugCommand(bot),
                         new EvalCommand(bot),
                         new ShutdownCommand(bot)
                 ).build();
-        
+
         bot.webhook.send(WebhookLog.Level.INFO, "Starting shards `"+(shardSetId*shardSetSize + 1) + " - " + ((shardSetId+1)*shardSetSize) + "` of `"+shardTotal+"`...");
         
         MessageAction.setDefaultMentions(Arrays.asList(MentionType.CHANNEL, MentionType.EMOTE, MentionType.USER));
