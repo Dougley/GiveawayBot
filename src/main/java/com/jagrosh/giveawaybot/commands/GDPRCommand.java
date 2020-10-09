@@ -2,9 +2,9 @@ package com.jagrosh.giveawaybot.commands;
 
 import com.jagrosh.giveawaybot.Bot;
 import com.jagrosh.giveawaybot.entities.Giveaway;
-import com.jagrosh.giveawaybot.rest.RestJDA;
 import com.jagrosh.jdautilities.command.Command;
 import com.jagrosh.jdautilities.command.CommandEvent;
+import net.dv8tion.jda.api.utils.MiscUtil;
 
 import java.util.List;
 
@@ -14,7 +14,8 @@ public class GDPRCommand extends Command {
     public GDPRCommand(Bot bot) {
         this.bot = bot;
         this.name = "gdpr";
-        this.help = "automated gdpr removal of user data";
+        this.help = "automated removal of user data respecting the GDPR\n" +
+                "Example: `g+gdpr 198137282018934784`";
         this.ownerCommand = true;
         this.guildOnly = false;
         this.hidden = true;
@@ -23,18 +24,24 @@ public class GDPRCommand extends Command {
     @Override
     protected void execute(CommandEvent event) {
         if (event.getArgs().isEmpty()) {
-            // TODO: Change message to be better
-            event.replyError("No arguments specified!");
+            event.replyError("`g+gdpr <userid>`");
             return;
         }
 
         String[] parts = event.getArgs().split("\\s+", 2);
 
-        long userId = Long.parseLong(parts[0]);
+        long userId;
 
-        RestJDA rest = bot.getRestJDA();
+        try {
+            userId = MiscUtil.parseSnowflake(parts[0]);
+        } catch (Exception exception) {
+            event.replyError("The provided userid isn't a valid snowflake following the regex pattern `\\d{1,20}` in radix 10.\n" +
+                    exception.getMessage());
+            return;
+        }
 
-        rest.retrieveUserById(userId).queue(user -> {
+        final long finalUserId = userId;
+        event.getJDA().retrieveUserById(userId, false).queue(user -> {
             // Delete all giveaways by their users
             List<Giveaway> giveaways = bot.getDatabase().giveaways.getGiveaways(user);
 
@@ -43,9 +50,7 @@ public class GDPRCommand extends Command {
                 bot.getDatabase().giveaways.deleteGiveaway(giveaway.messageId);
             }
 
-            // TODO: Ask Dougley what else has to be deleted (probably donator status)
-        }, failure -> {
-            event.replyError("User does not exist by their ID, can't delete their data.");
-        });
+            event.replySuccess("Successfully removed userdata for userid: `" + user.getId() + "`");
+        }, failure -> event.replyError("No user exists with id: `" + finalUserId + "`, can't delete their data."));
     }
 }
