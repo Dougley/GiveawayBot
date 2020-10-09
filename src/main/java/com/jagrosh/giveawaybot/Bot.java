@@ -134,7 +134,7 @@ public class Bot extends ListenerAdapter
         return database.giveaways.deleteGiveaway(messageId);
     }
 
-    public RestJDA startRestJDA() {
+    private RestJDA startRestJDA() {
         Config config = ConfigFactory.load();
 
         RestJDA rest = new RestJDA(config.getString("bot-token"));
