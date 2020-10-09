@@ -131,7 +131,7 @@ public class StartCommand extends GiveawayCommand
         catch(PermissionException ignore) {}
         
         // start the giveaway
-        Instant now = event.getMessage().getTimeCreated().toInstant();
+        Instant now = Instant.now();
         bot.startGiveaway(event.getTextChannel(), event.getAuthor(), now, seconds, winners, item);
     }
     
