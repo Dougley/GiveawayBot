@@ -18,6 +18,7 @@ package com.jagrosh.giveawaybot;
 import com.jagrosh.giveawaybot.commands.*;
 import com.jagrosh.giveawaybot.database.Database;
 import com.jagrosh.giveawaybot.entities.*;
+import com.jagrosh.giveawaybot.rest.RestJDA;
 import com.jagrosh.giveawaybot.util.FormatUtil;
 import com.jagrosh.jdautilities.command.CommandClient;
 import com.jagrosh.jdautilities.command.CommandClientBuilder;
@@ -90,7 +91,7 @@ public class Bot extends ListenerAdapter
     {
         return database;
     }
-    
+
     // public methods
     public void shutdown()
     {
@@ -198,6 +199,7 @@ public class Bot extends ListenerAdapter
                         
                         new DebugCommand(bot),
                         new EvalCommand(bot),
+                        new GDPRCommand(bot),
                         new ShutdownCommand(bot)
                 ).build();
         

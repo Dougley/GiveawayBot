@@ -24,6 +24,7 @@ import java.util.EnumSet;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.OnlineStatus;
+import net.dv8tion.jda.api.requests.GatewayIntent;
 import net.dv8tion.jda.api.utils.cache.CacheFlag;
 import org.slf4j.LoggerFactory;
 
@@ -53,9 +54,9 @@ public class Checker
         WebhookClient webhook = new WebhookClientBuilder(config.getString("webhook")).build();
         webhook.send(Constants.TADA + " Starting checker...");
         
-        JDA jda = new JDABuilder(config.getString("checker-token"))
+        JDA jda = JDABuilder.create(config.getString("checker-token"), EnumSet.noneOf(GatewayIntent.class))
                 .setStatus(OnlineStatus.IDLE)
-                .setDisabledCacheFlags(EnumSet.of(CacheFlag.ACTIVITY, CacheFlag.CLIENT_STATUS, 
+                .disableCache(EnumSet.of(CacheFlag.ACTIVITY, CacheFlag.CLIENT_STATUS,
                                                   CacheFlag.EMOTE, CacheFlag.VOICE_STATE))
                 .build().awaitReady();
         

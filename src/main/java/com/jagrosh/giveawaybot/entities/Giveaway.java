@@ -28,6 +28,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.MessageBuilder;
+import net.dv8tion.jda.api.entities.ISnowflake;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.exceptions.ErrorResponseException;
 import net.dv8tion.jda.api.exceptions.RateLimitedException;
@@ -156,7 +157,7 @@ public class Giveaway
         {
             // stream over all the users that reacted (paginating as necessary
             List<Long> ids = restJDA.getReactionUsers(channelId, messageId, EncodingUtil.encodeUTF8(Constants.TADA))
-                    .stream().map(u -> u.getIdLong()).distinct().collect(Collectors.toList());
+                    .stream().map(ISnowflake::getIdLong).distinct().collect(Collectors.toList());
            //restJDA.getReactionUsers(channelId, messageId, EncodingUtil.encodeUTF8(Constants.TADA))..submit().thenAcceptAsync(ids -> {
             List<Long> wins = GiveawayUtil.selectWinners(ids, winners);
             String toSend;
